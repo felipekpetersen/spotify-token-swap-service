@@ -33,10 +33,10 @@ module SpotifyTokenSwapService
     include Singleton
 
     def initialize
-      self.client_id = ENV["SPOTIFY_CLIENT_ID"]
-      self.client_secret = ENV["SPOTIFY_CLIENT_SECRET"]
-      self.client_callback_url = ENV["SPOTIFY_CLIENT_CALLBACK_URL"]
-      self.encryption_secret = ENV["ENCRYPTION_SECRET"]
+      self.client_id = ENV["9a41d6d229754090b8cd983dacfc89e7"]
+      self.client_secret = ENV["a20fcd1ebc7e481c8c9ee0469d5385b3"]
+      self.client_callback_url = ENV["spotify-ios-quick-start://spotify-login-callback"]
+      self.encryption_secret = ENV["30sX1mruIU"]
 
       validate_client_credentials
     end
