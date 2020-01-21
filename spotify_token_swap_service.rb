@@ -35,7 +35,7 @@ module SpotifyTokenSwapService
     def initialize
       self.client_id = ENV["SPOTIFY_CLIENT_ID"]
       self.client_secret = ENV["SPOTIFY_CLIENT_SECRET"]
-      self.client_callback_url = ENV["SPOTIFY_CLIENT_CALLBACK_URL"]
+      self.client_callback_url = "syncs-login://callback"
       self.encryption_secret = ENV["ENCRYPTION_SECRET"]
 
       validate_client_credentials
