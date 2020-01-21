@@ -18,7 +18,7 @@
     "SPOTIFY_CLIENT_CALLBACK_URL": {
       "description":
         "A registered callback URL for your Spotify application. Register a callback in 'Edit Settings' at https://developer.spotify.com/dashboard",
-      "value": "spotify-ios-quick-start://spotify-login-callback",
+      "value": "yourapplication://",
       "required": true
     },
     "ENCRYPTION_SECRET": {
