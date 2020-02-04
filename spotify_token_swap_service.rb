@@ -86,10 +86,10 @@ module SpotifyTokenSwapService
       self.class.post("/api/token", options)
     end
 
-    def playlists(limit: )
+    def playlists(limit:, offset: )
       options = default_options.deep_merge(query: {
         limit: limit,
-        offset: 5
+        offset: offset
 
       })
       self.class.post("/v1/me/playlists", options)
@@ -247,7 +247,7 @@ module SpotifyTokenSwapService
     get "/v1/me/playlists" do
       begin
         refresh_params = DecryptParameters.new(params).run
-        http = HTTP.new.playlists(limit: refresh_params[:limit])
+        http = HTTP.new.playlists(limit: refresh_params[:limit], offset: refresh_params[:offset])
         status_code, response = EmptyMiddleware.new(http).run
 
         status status_code
