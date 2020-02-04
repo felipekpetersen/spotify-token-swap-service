@@ -86,6 +86,13 @@ module SpotifyTokenSwapService
       self.class.post("/api/token", options)
     end
 
+    def recoomend()
+      options = default_options.deep_merge(query: {
+      })
+
+      self.class.post("/v1/recommendations", options)
+    end
+
     private
 
     def default_options
@@ -138,6 +145,10 @@ module SpotifyTokenSwapService
     end
 
     def refresh_token
+      params[:refresh_token].to_s.gsub("\\n", "\n")
+    end
+
+    def recommended
       params[:refresh_token].to_s.gsub("\\n", "\n")
     end
 
@@ -211,6 +222,23 @@ module SpotifyTokenSwapService
       begin
         refresh_params = DecryptParameters.new(params).run
         http = HTTP.new.refresh_token(refresh_token: refresh_params[:refresh_token])
+        status_code, response = EmptyMiddleware.new(http).run
+
+        status status_code
+        json response
+      rescue OpenSSL::Cipher::CipherError
+        status 400
+        json error: "invalid refresh_token"
+      rescue StandardError => e
+        status 400
+        json error: e
+      end
+    end
+
+    get "/v1/recommendations" do
+      begin
+        refresh_params = DecryptParameters.new(params).run
+        http = HTTP.new.recommendations()
         status_code, response = EmptyMiddleware.new(http).run
 
         status status_code
