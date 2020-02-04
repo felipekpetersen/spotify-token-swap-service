@@ -86,6 +86,15 @@ module SpotifyTokenSwapService
       self.class.post("/api/token", options)
     end
 
+    def playlists(limit: )
+      options = default_options.deep_merge(query: {
+        limit: limit,
+        offset: 5
+
+      })
+      self.class.post("/v1/me/playlists", options)
+    end
+
     def recoomend()
       options = default_options.deep_merge(query: {
       })
@@ -222,6 +231,23 @@ module SpotifyTokenSwapService
       begin
         refresh_params = DecryptParameters.new(params).run
         http = HTTP.new.refresh_token(refresh_token: refresh_params[:refresh_token])
+        status_code, response = EmptyMiddleware.new(http).run
+
+        status status_code
+        json response
+      rescue OpenSSL::Cipher::CipherError
+        status 400
+        json error: "invalid refresh_token"
+      rescue StandardError => e
+        status 400
+        json error: e
+      end
+    end
+
+    get "/v1/me/playlists" do
+      begin
+        refresh_params = DecryptParameters.new(params).run
+        http = HTTP.new.playlists(limit: refresh_params[:limit])
         status_code, response = EmptyMiddleware.new(http).run
 
         status status_code
