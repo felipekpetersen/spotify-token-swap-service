@@ -89,13 +89,13 @@ SPOTIFY_API_ENDPOINT = URI.parse("https://api.spotify.com")
       self.class.post("/api/token", options)
     end
 
-    def playlists(limit:, offset: )
-      options = default_options.deep_merge(query: {
-        limit: limit,
-        offset: offset
-      })
-      self.class.post("/v1/me/playlists", options)
-    end
+    # def playlists(limit:, offset: )
+    #   options = default_options.deep_merge(query: {
+    #     limit: limit,
+    #     offset: offset
+    #   })
+    #   self.class.post("/v1/me/playlists", options)
+    # end
 
     def recoomend()
       options = default_options.deep_merge(query: {
