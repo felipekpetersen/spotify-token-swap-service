@@ -246,23 +246,6 @@ SPOTIFY_API_ENDPOINT = URI.parse("https://api.spotify.com")
       end
     end
 
-    # get "/v1/me/playlists" do
-    #   begin
-    #     refresh_params = DecryptParameters.new(params).run
-    #     http = HTTP.new.playlists(limit: refresh_params[:limit], offset: refresh_params[:offset])
-    #     status_code, response = EmptyMiddleware.new(http).run
-
-    #     status status_code
-    #     json response
-    #   rescue OpenSSL::Cipher::CipherError
-    #     status 400
-    #     json error: "invalid refresh_token"
-    #   rescue StandardError => e
-    #     status 400
-    #     json error: e
-    #   end
-    # end
-
 
 get '/v1/me/playlists' do
 
@@ -291,6 +274,83 @@ get '/v1/me/playlists' do
 end
 
 
+get '/v1/me' do
+
+  # Request a new access token using the POST:ed refresh token
+
+  http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
+  http.use_ssl = true
+
+  request = Net::HTTP::Get.new("/v1/me")
+  auth = "Bearer " + params[:auth]
+  request.add_field("Authorization", auth)
+
+  # encrypted_token = params[:refresh_token]
+  # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
+  # refresh_token = params[:refresh_token]
+  request.form_data = {
+      # "grant_type" => "refresh_token",
+      # "refresh_token" => refresh_token
+  }
+
+  response = http.request(request)
+
+  status response.code.to_i
+  return response.body
+
+end
+
+get '/v1/me/player/recently-played' do
+
+  # Request a new access token using the POST:ed refresh token
+
+  http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
+  http.use_ssl = true
+
+  request = Net::HTTP::Get.new("/v1/me/player/recently-played")
+  auth = "Bearer " + params[:auth]
+  request.add_field("Authorization", auth)
+
+  # encrypted_token = params[:refresh_token]
+  # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
+  # refresh_token = params[:refresh_token]
+  request.form_data = {
+      # "grant_type" => "refresh_token",
+      # "refresh_token" => refresh_token
+  }
+
+  response = http.request(request)
+
+  status response.code.to_i
+  return response.body
+
+end
+
+get '/v1/me/top/tracks' do
+
+  # Request a new access token using the POST:ed refresh token
+
+  http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
+  http.use_ssl = true
+
+  request = Net::HTTP::Get.new("/v1/me/top/tracks")
+  auth = "Bearer " + params[:auth]
+  request.add_field("Authorization", auth)
+
+  # encrypted_token = params[:refresh_token]
+  # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
+  # refresh_token = params[:refresh_token]
+  request.form_data = {
+      # "grant_type" => "refresh_token",
+      # "refresh_token" => refresh_token
+  }
+
+  response = http.request(request)
+
+  status response.code.to_i
+  return response.body
+
+end
 
     get "/v1/recommendations" do
       begin
