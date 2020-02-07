@@ -260,10 +260,9 @@ AUTH_HEADER = "Basic " + Base64.strict_encode64(CLIENT_ID + ":" + CLIENT_SECRET)
       request = Net::HTTP::Post.new("/api/token")
   
       request.add_field("Authorization", AUTH_HEADER)
-  
       # encrypted_token = params[:refresh_token]
       # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
-      refresh_token = params[:refresh_token]
+      refresh_token = decrypt_refresh_token(params[:refresh_token])
       request.form_data = {
           "grant_type" => "refresh_token",
           "refresh_token" => refresh_token
