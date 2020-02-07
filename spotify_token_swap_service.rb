@@ -132,9 +132,9 @@ AUTH_HEADER = "Basic " + Base64.strict_encode64(CLIENT_ID + ":" + CLIENT_SECRET)
     def run
       response = httparty_instance.parsed_response.with_indifferent_access
 
-      if response[:refresh_token].present?
-        response[:refresh_token] = encrypt_refresh_token(response[:refresh_token])
-      end
+      # if response[:refresh_token].present?
+      #   response[:refresh_token] = encrypt_refresh_token(response[:refresh_token])
+      # end
 
       [httparty_instance.response.code.to_i, response]
     end
@@ -262,7 +262,7 @@ AUTH_HEADER = "Basic " + Base64.strict_encode64(CLIENT_ID + ":" + CLIENT_SECRET)
       request.add_field("Authorization", AUTH_HEADER)
       # encrypted_token = params[:refresh_token]
       # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
-      refresh_token = decrypt_refresh_token(params[:refresh_token])
+      refresh_token = params[:refresh_token]
       request.form_data = {
           "grant_type" => "refresh_token",
           "refresh_token" => refresh_token
