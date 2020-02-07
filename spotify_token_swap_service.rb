@@ -12,7 +12,11 @@ module SpotifyTokenSwapService
 
   SPOTIFY_ACCOUNTS_ENDPOINT = URI.parse("https://accounts.spotify.com")
 SPOTIFY_API_ENDPOINT = URI.parse("https://api.spotify.com")
-
+CLIENT_ID = "9a41d6d229754090b8cd983dacfc89e7"
+CLIENT_SECRET = "a20fcd1ebc7e481c8c9ee0469d5385b3"
+ENCRYPTION_SECRET = "|NwDQ-R1J,:1ct^@m+[s&C(k}2g]g+T|AuPXz07AT7jB oFjk|tCY+|/|Y:u[Er8"
+CLIENT_CALLBACK_URL = "syncs-login://callback"
+AUTH_HEADER = "Basic " + Base64.strict_encode64(CLIENT_ID + ":" + CLIENT_SECRET)
   # SpotifyTokenSwapService::ConfigHelper
   # SpotifyTokenSwapService::ConfigError
   # SpotifyTokenSwapService::Config
@@ -246,6 +250,31 @@ SPOTIFY_API_ENDPOINT = URI.parse("https://api.spotify.com")
       end
     end
 
+    post '/refresh' do
+
+      # Request a new access token using the POST:ed refresh token
+  
+      http = Net::HTTP.new(SPOTIFY_ACCOUNTS_ENDPOINT.host, SPOTIFY_ACCOUNTS_ENDPOINT.port)
+      http.use_ssl = true
+  
+      request = Net::HTTP::Post.new("/api/token")
+  
+      request.add_field("Authorization", AUTH_HEADER)
+  
+      # encrypted_token = params[:refresh_token]
+      # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
+      refresh_token = params[:refresh_token]
+      request.form_data = {
+          "grant_type" => "refresh_token",
+          "refresh_token" => refresh_token
+      }
+  
+      response = http.request(request)
+  
+      status response.code.to_i
+      return response.body
+  
+  end
 
 get '/v1/me/playlists' do
 
