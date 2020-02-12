@@ -275,6 +275,33 @@ AUTH_HEADER = "Basic " + Base64.strict_encode64(CLIENT_ID + ":" + CLIENT_SECRET)
   
   end
 
+  put 'v1/me/player/play' do
+
+    # Request a new access token using the POST:ed refresh token
+  
+    http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
+    http.use_ssl = true
+  
+    request = Net::HTTP::Get.new("v1/me/player/play")
+    auth = "Bearer " + params[:auth]
+    request.add_field("Authorization", auth)
+    
+    # encrypted_token = params[:refresh_token]
+    # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
+    # refresh_token = params[:refresh_token]
+    request.form_data = {
+      "context_uri": params[:context_uri]
+        # "grant_type" => "refresh_token",
+        # "refresh_token" => refresh_token
+    }
+  
+    response = http.request(request)
+  
+    status response.code.to_i
+    return response.body
+  
+  end
+
 get '/v1/me/playlists' do
 
   # Request a new access token using the POST:ed refresh token
