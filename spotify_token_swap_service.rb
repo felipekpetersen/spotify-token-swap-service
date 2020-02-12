@@ -282,7 +282,7 @@ AUTH_HEADER = "Basic " + Base64.strict_encode64(CLIENT_ID + ":" + CLIENT_SECRET)
     http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
     http.use_ssl = true
   
-    request = Net::HTTP::get.new("/v1/me/player/play")
+    request = Net::HTTP::put.new("/v1/me/player/play")
     auth = "Bearer " + params[:auth]
     request.add_field("Authorization", auth)
     request.add_field("context_uri", params[:context_uri])
