@@ -337,7 +337,7 @@ put '/v1/me/player/play' do
   http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
   http.use_ssl = true
 
-  request = Net::HTTP::Get.new("/v1/me")
+  request = Net::HTTP::Put.new("/v1/me")
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
   context_uri = params[:context_uri]
