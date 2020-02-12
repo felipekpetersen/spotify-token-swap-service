@@ -290,7 +290,7 @@ AUTH_HEADER = "Basic " + Base64.strict_encode64(CLIENT_ID + ":" + CLIENT_SECRET)
     # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
     # refresh_token = params[:refresh_token]
     request.form_data = {
-      "context_uri": params[:context_uri]
+      "context_uri" => params[:context_uri]
         # "grant_type" => "refresh_token",
         # "refresh_token" => refresh_token
     }
