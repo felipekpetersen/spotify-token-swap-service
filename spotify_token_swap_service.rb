@@ -284,8 +284,8 @@ AUTH_HEADER = "Basic " + Base64.strict_encode64(CLIENT_ID + ":" + CLIENT_SECRET)
   
     request = Net::HTTP::Get.new("/v1/me/player/play")
     auth = "Bearer " + params[:auth]
-    request.add_field("Authorization", auth)
-     request.add_field("context_uri", params[:context_uri])
+    # request.add_field("Authorization", auth)
+     #request.add_field("context_uri", params[:context_uri])
     # encrypted_token = params[:refresh_token]
     # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
     # refresh_token = params[:refresh_token]
