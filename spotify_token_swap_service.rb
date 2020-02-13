@@ -345,10 +345,13 @@ put '/v1/me/player/play' do
   # encrypted_token = params[:refresh_token]
   # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
   # refresh_token = params[:refresh_token]
+  request.body = {
+    "context_uri" => "spotify:track:1301WleyT98MSxVHPZCA6M"
+  }
   request.form_data = {
       # "grant_type" => "refresh_token",
       # "refresh_token" => refresh_token
-      "context_uri" => "spotify:track:1301WleyT98MSxVHPZCA6M"
+      # "context_uri" => "spotify:track:1301WleyT98MSxVHPZCA6M"
   }
 
   response = http.request(request)
