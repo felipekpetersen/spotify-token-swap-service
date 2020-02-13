@@ -341,7 +341,7 @@ put '/v1/me/player/play' do
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
   context_uri = params[:context_uri]
-  request.add_field("context_uri", "spotify:track:1301WleyT98MSxVHPZCA6M")
+  # request.add_field("context_uri", "spotify:track:1301WleyT98MSxVHPZCA6M")
   # encrypted_token = params[:refresh_token]
   # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
   # refresh_token = params[:refresh_token]
