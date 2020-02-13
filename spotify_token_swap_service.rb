@@ -340,7 +340,7 @@ put '/v1/me/player/play' do
   request = Net::HTTP::Put.new("/v1/me/player/play")
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
-  request["Content-Type"] = "application/json"
+  request.add_field("Content-Type", "application/json")
   # context_uri = params[:context_uri]
   # request.add_field("context_uri", "spotify:track:1301WleyT98MSxVHPZCA6M")
   # encrypted_token = params[:refresh_token]
