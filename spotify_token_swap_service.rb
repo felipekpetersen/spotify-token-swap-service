@@ -343,16 +343,16 @@ put '/v1/me/player/play' do
   request.add_field("Accept", "application/json")
   request.add_field("Content-Type", "application/json")
   # context_uri = params[:context_uri]
-  request.add_field("context_uri", "spotify:album:1Je1IMUlBXcx1Fz0WE7oPT")
+  # request.add_field("context_uri", "spotify:album:1Je1IMUlBXcx1Fz0WE7oPT")
   # encrypted_token = params[:refresh_token]
   # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
   # refresh_token = params[:refresh_token]
   # request.set_form_data({"context_uri" => "spotify:track:1301WleyT98MSxVHPZCA6M"})
-  # request.body = '{"context_uri":"spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"}'
+  request.body = '{"context_uri":"spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"}'
   request.form_data = {
       # "grant_type" => "refresh_token",
       # "refresh_token" => refresh_token
-      "context_uri" => "spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"
+      # "context_uri" => "spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"
   }
 
   response = http.request(request)
