@@ -364,12 +364,11 @@ end
 
 get '/v1/search' do
 
-  # Request a new access token using the POST:ed refresh token
-
   http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
   http.use_ssl = true
 
-  request = Net::HTTP::Get.new("/v1/search?q=" + params[:q] "&type=" + params[:type] )
+  url = "/v1/search?q=" + params[:q] "&type=" + params[:type]
+  request = Net::HTTP::Get.new(url )
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
   # paramsTeste = { :q => params[:q], :type => params[:type]}
