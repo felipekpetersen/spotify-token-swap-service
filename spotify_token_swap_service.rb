@@ -378,7 +378,7 @@ get 'v1/search' do
   # refresh_token = params[:refresh_token]
   request.form_data = {
     "q" => params[:q]
-    "type" => "playlist, track"
+    "type" => "playlist,track"
       # "grant_type" => "refresh_token",
       # "refresh_token" => refresh_token
   }
