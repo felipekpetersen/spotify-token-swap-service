@@ -374,10 +374,10 @@ get '/v1/search' do
   request.add_field("Authorization", auth)
   # paramsTeste = { :q => params[:q], :type => params[:type]}
   # request.query = URI.encode_www_form(paramsTeste)
-  request.body = '{"q":"girl", "type": "track"}'
+  # request.body = '{"q":"girl", "type": "track"}'
 
-  # request.add_field("q", params[:q])
-  # request.add_field("type", params[:type])
+  request.add_field("q", "girl")
+  request.add_field("type", "track")
   # encrypted_token = params[:refresh_token]
   # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
   # refresh_token = params[:refresh_token]
