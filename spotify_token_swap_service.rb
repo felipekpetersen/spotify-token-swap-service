@@ -369,7 +369,7 @@ get '/v1/search' do
   http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
   http.use_ssl = true
 
-  request = Net::HTTP::Get.new("/v1/search")
+  request = Net::HTTP::Get.new("/v1/search?q=dias%20de%20luta&type=artist%2Ctrack")
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
   # request.add_field("q", params[:q])
@@ -378,8 +378,8 @@ get '/v1/search' do
   # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
   # refresh_token = params[:refresh_token]
   request.form_data = {
-    "q" => params[:q],
-    "type" => params[:type]
+    # "q" => params[:q],
+    # "type" => params[:type]
       # "grant_type" => "refresh_token",
       # "refresh_token" => refresh_token
   }
