@@ -373,7 +373,7 @@ get '/v1/search' do
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
   paramsTeste = { :q => params[:q], :type => params[:type]}
-  uri.query = URI.encode_www_form(paramsTeste)
+  request.query = URI.encode_www_form(paramsTeste)
 
   # request.add_field("q", params[:q])
   # request.add_field("type", params[:type])
