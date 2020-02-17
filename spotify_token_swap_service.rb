@@ -373,7 +373,7 @@ get '/v1/search' do
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
   request.add_field("q", params[:q])
-  request.add_field("type", "playlist,track")
+  request.add_field("type", params[:type])
   # encrypted_token = params[:refresh_token]
   # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
   # refresh_token = params[:refresh_token]
