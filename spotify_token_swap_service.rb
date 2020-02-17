@@ -372,8 +372,9 @@ get '/v1/search' do
   request = Net::HTTP::Get.new("/v1/search")
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
-  paramsTeste = { :q => params[:q], :type => params[:type]}
-  request.query = URI.encode_www_form(paramsTeste)
+  # paramsTeste = { :q => params[:q], :type => params[:type]}
+  # request.query = URI.encode_www_form(paramsTeste)
+  request.body = '{"q":"girl", "type": "track"}'
 
   # request.add_field("q", params[:q])
   # request.add_field("type", params[:type])
