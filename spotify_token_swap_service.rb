@@ -377,7 +377,7 @@ get 'v1/search' do
   # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
   # refresh_token = params[:refresh_token]
   request.form_data = {
-    "q" => params[:q]
+    "q" => params[:q],
     "type" => "playlist,track"
       # "grant_type" => "refresh_token",
       # "refresh_token" => refresh_token
