@@ -387,8 +387,8 @@ get '/v1/search' do
   response = http.request(request)
 
   status response.code.to_i
-  return response.body
-
+  # return response.body
+  return request
 end
 
 get '/v1/me/player/recently-played' do
