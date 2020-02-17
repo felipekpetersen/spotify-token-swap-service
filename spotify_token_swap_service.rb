@@ -372,13 +372,14 @@ get '/v1/search' do
   request = Net::HTTP::Get.new("/v1/search")
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
-
+  request.add_field("q", params[:q])
+  request.add_field("type", "playlist,track")
   # encrypted_token = params[:refresh_token]
   # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
   # refresh_token = params[:refresh_token]
   request.form_data = {
-    "q" => params[:q],
-    "type" => "playlist,track"
+    # "q" => params[:q],
+    # "type" => "playlist,track"
       # "grant_type" => "refresh_token",
       # "refresh_token" => refresh_token
   }
