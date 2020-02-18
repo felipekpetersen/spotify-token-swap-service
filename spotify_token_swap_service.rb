@@ -362,6 +362,24 @@ put '/v1/me/player/play' do
 
 end
 
+get '/v1/playlists/tracks' do
+
+  http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
+  http.use_ssl = true
+
+  url = "/v1/playlists/" + params[:playlist_id] + "/tracks"
+  request = Net::HTTP::Get.new(url)
+  auth = "Bearer " + params[:auth]
+  request.add_field("Authorization", auth)
+
+  request.form_data = {
+  }
+  response = http.request(request)
+
+  status response.code.to_i
+  return response.body
+end
+
 get '/v1/search' do
 
   http = Net::HTTP.new(SPOTIFY_API_ENDPOINT.host, SPOTIFY_API_ENDPOINT.port)
@@ -371,20 +389,8 @@ get '/v1/search' do
   request = Net::HTTP::Get.new(url)
   auth = "Bearer " + params[:auth]
   request.add_field("Authorization", auth)
-  # paramsTeste = { :q => params[:q], :type => params[:type]}
-  # request.query = URI.encode_www_form(paramsTeste)
-  # request.body = '{"q":"girl", "type": "track"}'
 
-  # request.add_field("q", "girl")
-  # request.add_field("type", "track")
-  # encrypted_token = params[:refresh_token]
-  # refresh_token = encrypted_token.decrypt(:symmetric, :password => ENCRYPTION_SECRET)
-  # refresh_token = params[:refresh_token]
   request.form_data = {
-    # "q" => params[:q],
-    # "type" => params[:type]
-      # "grant_type" => "refresh_token",
-      # "refresh_token" => refresh_token
   }
 
   response = http.request(request)
